@@ -1,0 +1,73 @@
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "etherealink"
+version = "0.0.1"
+description = 'url shortener for n-time accessible links'
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Apache-2.0 OR MIT"
+license-files = { globs = ["LICENSE*"] }
+keywords = []
+authors = [
+  { name = "Patrick Armengol", email = "patrickarmengol@protonmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.scripts]
+
+[project.urls]
+Documentation = "https://github.com/patrickarmengol/etherealink#readme"
+Issues = "https://github.com/patrickarmengol/etherealink/issues"
+Source = "https://github.com/patrickarmengol/etherealink"
+
+[tool.pyright]
+include = ["src/etherealink", "tests"]
+exclude = [
+    "**/__pycache__",
+]
+typeCheckingMode = "strict"
+
+[tool.ruff]
+target-version = "py37"
+line-length = 120
+select = ["A", "B", "C", "E", "F", "FBT", "I", "N", "Q", "RUF", "S", "T", "UP", "W", "YTT"]
+ignore = [
+  # Allow non-abstract empty methods in abstract base classes
+  "B027",
+  # Ignore McCabe complexity
+  "C901",
+  # Allow boolean positional values in function calls, like `dict.get(... True)`
+  "FBT003",
+  # Ignore checks for possible passwords
+  "S105", "S106", "S107",
+]
+unfixable = [
+  # Don't touch unused imports
+  "F401",
+]
+
+[tool.ruff.isort]
+known-first-party = ["etherealink"]
+
+[tool.ruff.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.per-file-ignores]
+# Tests can use relative imports and assertions
+"tests/**/*" = ["I252", "S101"]
+
+[tool.autopep8]
+max_line_length = 120
