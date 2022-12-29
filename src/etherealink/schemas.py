@@ -6,11 +6,18 @@ from pydantic import AnyHttpUrl, BaseModel, validator
 
 class URLBase(BaseModel):
     target_url: AnyHttpUrl
+
+
+class URLSettings(BaseModel):
     clicks_left: int | None
     expiry: datetime | None
 
 
-class URLCreate(URLBase):
+class URLCreate(URLBase, URLSettings):
+    pass
+
+
+class URLCustom(URLCreate):
     custom_key: str | None
 
     @validator('custom_key')
@@ -23,14 +30,9 @@ class URLCreate(URLBase):
         return v
 
 
-class URLChange(BaseModel):
-    clicks_left: int | None
-    expiry: datetime | None
-
-
-class URLInfo(URLBase):
-    url: str
-    admin_url: str
+class URLInfo(URLCreate):
+    url_key: str
+    admin_key: str
 
     class Config:
         orm_mode = True
