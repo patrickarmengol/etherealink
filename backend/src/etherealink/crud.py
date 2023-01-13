@@ -14,7 +14,6 @@ async def is_unique_key(key: str):
 
 
 async def create_db_url(url: schemas.URLCustom) -> models.URL:
-    # TODO: check for custom key collisions
     if url.custom_key:
         if is_unique_key(url.custom_key):
             url_key = url.custom_key
