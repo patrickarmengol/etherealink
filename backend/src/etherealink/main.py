@@ -2,7 +2,6 @@ from datetime import datetime
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import RedirectResponse
 
 from etherealink import crud, schemas
 from etherealink.database import orm_init
@@ -32,7 +31,7 @@ async def create_url(url: schemas.URLCustom):
     return await crud.create_db_url(url)
 
 
-@app.get('/{url_key}')
+@app.get('/{url_key}', response_model=schemas.URLBase)
 async def redirect_to_target(url_key: str):
     if db_url := await crud.get_db_url_by_url_key(url_key):
         if db_url.clicks_left is not None and db_url.clicks_left < 1:
@@ -41,7 +40,7 @@ async def redirect_to_target(url_key: str):
             raise HTTPException(status_code=400, detail='link has expired')
         else:
             await crud.update_url_settings(db_url, schemas.URLSettings(clicks_left=db_url.clicks_left - 1, expiry=db_url.expiry))
-            return RedirectResponse(db_url.target_url)
+            return db_url
     else:
         raise HTTPException(status_code=404, detail='url not found in database')
 
