@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 [project]
 name = "etherealink"
 version = "0.1.0"
-description = 'url shortener for self-destructible links'
+description = 'url shortener for self-destructible and expirable links'
 readme = "README.md"
 requires-python = ">=3.9"
 license = "Apache-2.0 OR MIT"

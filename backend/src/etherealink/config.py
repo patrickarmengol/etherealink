@@ -5,8 +5,8 @@ from pydantic import BaseSettings
 
 class Settings(BaseSettings):
     env_name: str = 'local'
-    base_url: str = 'http://localhost:8000'
-    db_url: str = 'sqlite:///./etherealink.sqlite'
+    base_url: str = 'http://localhost:5000'
+    db_url: str = 'sqlite:///:memory:'
 
     class Config(BaseSettings.Config):  # https://github.com/pydantic/pydantic/issues/4223
         env_file = '.env'

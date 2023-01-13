@@ -1,17 +1,4 @@
-from datetime import datetime
-
 from etherealink import keygen, models, schemas
-
-
-async def create_db_url(url: schemas.URLCustom) -> models.URL:
-    url_key = url.custom_key if url.custom_key else await keygen.create_unique_key()
-    admin_key = f'{url_key}_{await keygen.create_random_key(8)}'
-    db_url = await models.URL.create(
-        **url.dict(),
-        url_key=url_key,
-        admin_key=admin_key,
-    )
-    return db_url  # maybe use pydantic's .from_orm() to convert here?
 
 
 async def get_db_url_by_url_key(url_key: str) -> models.URL | None:
@@ -22,9 +9,33 @@ async def get_db_url_by_url_key(url_key: str) -> models.URL | None:
         return None
 
 
+async def is_unique_key(key: str):
+    return not await get_db_url_by_url_key(key)
+
+
+async def create_db_url(url: schemas.URLCustom) -> models.URL:
+    # TODO: check for custom key collisions
+    if url.custom_key:
+        if is_unique_key(url.custom_key):
+            url_key = url.custom_key
+        else:
+            raise ValueError('invalid custom url key; already in use')
+    else:
+        url_key = await keygen.create_random_key()
+        while not is_unique_key(url_key):
+            url_key = await keygen.create_random_key()
+    admin_key = f'{url_key}_{await keygen.create_random_key(8)}'
+    db_url = await models.URL.create(
+        **url.dict(),
+        url_key=url_key,
+        admin_key=admin_key,
+    )
+    return db_url  # maybe use pydantic's .from_orm() to convert here?
+
+
 async def update_url_settings(db_url: models.URL, settings: schemas.URLSettings):
     # TODO: find out if there's a better way to update fields for single model obj
-    await db_url.update_from_dict(settings.dict(exclude_unset=True))
+    await db_url.update_from_dict(settings.dict(exclude_unset=True))  # type: ignore
     await db_url.save()
     return db_url
 

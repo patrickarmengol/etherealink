@@ -10,7 +10,7 @@ app = FastAPI()
 orm_init(app)
 
 
-@app.post('/create/', response_model=schemas.URLInfo)
+@app.post('/create', response_model=schemas.URLInfo)
 async def create_url(url: schemas.URLCustom):
     if url.custom_key and await crud.get_db_url_by_url_key(url.custom_key):
         raise HTTPException(status_code=400, detail='url key already in use')
