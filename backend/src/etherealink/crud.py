@@ -21,7 +21,7 @@ async def create_db_url(url: schemas.URLCustom) -> models.URL:
             raise ValueError('invalid custom url key; already in use')
     else:
         url_key = await keygen.create_random_key()
-        while not is_unique_key(url_key):
+        while not await is_unique_key(url_key):
             url_key = await keygen.create_random_key()
     admin_key = f'{url_key}_{await keygen.create_random_key(8)}'
     db_url = await models.URL.create(
