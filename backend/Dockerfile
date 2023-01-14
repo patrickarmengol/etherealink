@@ -14,4 +14,4 @@ COPY . /app
 RUN pip install --upgrade pip build hatchling
 RUN pip install .
 
-CMD uvicorn reciplease.main:app --host 0.0.0.0 --port 5000
+CMD uvicorn etherealink.main:app --host 0.0.0.0 --port 5000
