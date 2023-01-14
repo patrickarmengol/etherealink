@@ -2,6 +2,7 @@
 FROM node:lts-alpine as build-stage
 
 # pass env vars into docker env with --build-arg
+# no conditional needed since empty strings will be overwritten by defaults
 ARG VITE_API_URL
 ENV VITE_API_URL=$VITE_API_URL
 ARG VITE_BASE_URL
