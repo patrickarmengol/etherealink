@@ -1,5 +1,6 @@
 # etherealink
 
+FastAPI backend for **etherealink**
 URL shortener API for self-destructible and expirable links
 
 -----

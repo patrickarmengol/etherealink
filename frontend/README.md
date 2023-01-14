@@ -1,29 +1,50 @@
-# etherealink
+# etherealink frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+Vue.js frontend for **etherealink**
+URL shortener for self-destructible and expirable links
 
-## Recommended IDE Setup
+-----
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+**Table of Contents**
 
-## Customize configuration
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Installation
 
-## Project Setup
+set the `VITE_BASE_URL` and `VITE_API_URL` environment variables (works with .env file)
 
-```sh
+with docker:
+```console
+git clone git@github.com:patrickarmengol/etherealink.git
+cd etherealink/frontend
+
+docker build -t etherealink-frontend .
+(can pass env vars with --build-arg VITE_BASE_URL="...")
+docker run -it -p 8080:80 --rm etherealink-frontend
+```
+
+without docker:
+```console
+git clone git@github.com:patrickarmengol/etherealink.git
+cd etherealink/frontend
+
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
+npm install -g http-server
 npm run build
+http-server dist
 ```
+
+
+## Usage
+
+submit a valid target URL and specify expiry settings in the form
+the response contains a shortened link that will redirect you when visited and an admin link where you can change expiry settings for the link or delete it
+
+## License
+
+`etherealink` is distributed under the terms of any of the following licenses:
+
+- [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html)
+- [MIT](https://spdx.org/licenses/MIT.html)
