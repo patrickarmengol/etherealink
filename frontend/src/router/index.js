@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import Admin from "../components/Admin.vue";
 import Form from "../components/Form.vue";
 import Redirector from "../components/Redirector.vue";
 
@@ -14,6 +15,11 @@ const router = createRouter({
             component: Redirector,
             props: true
         },
+        {
+            path: '/admin/:adminKey',
+            component: Admin,
+            props: true
+        }
     ]
 });
 

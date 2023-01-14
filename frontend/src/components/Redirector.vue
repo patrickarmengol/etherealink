@@ -24,15 +24,16 @@ export default {
         async fetchData() {
             try {
                 const response = await fetch(`${this.apiUrl}/${this.urlKey}`);
-                const data = await response.json();
-                if (data.target_url && response.ok) {
-                    window.location = data.target_url
+                const res_data = await response.json();
+                if (res_data.target_url && response.ok) {
+                    // redirect
+                    window.location = res_data.target_url
                 } else {
                     this.error = {
                         status: response.status,
                         message: response.statusText,
-                        body: data,
-                    }
+                        body: res_data,
+                    };
                 }
             } catch (err) {
                 console.log(err);

@@ -1,5 +1,5 @@
 <template>
-    <div class="text-white">
+    <div>
         <form class="form-group mt-5" @submit.prevent="submitForm">
             <label class="form-control-label">Target URL:</label>
             <input class="form-control" type="text" v-model="formData.target_url" required />
