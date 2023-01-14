@@ -1,7 +1,20 @@
-FROM python:3.11-buster
+ARG PLATFORM=local
+
+FROM python:3.11-buster as base
+
+# conditionally set env var based on platform to avoid empty strings
+
+FROM base as env-local
+
+# do nothing
+
+FROM base as env-railway
 
 ARG DB_URL
 ENV DB_URL=$DB_URL
+
+
+FROM env-${PLATFORM} AS final
 
 WORKDIR /app
 
