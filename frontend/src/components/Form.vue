@@ -55,6 +55,8 @@ export default {
             this.url_key = "";
             this.admin_key = "";
             try {
+                console.log(`${import.meta.env.BASE_URL}`)
+                console.log(`${this.apiUrl}/create`)
                 const response = await fetch(`${this.apiUrl}/create`, {
                     method: "POST",
                     body: JSON.stringify(this.formData),
