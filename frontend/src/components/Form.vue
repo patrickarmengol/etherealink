@@ -55,11 +55,15 @@ export default {
             this.url_key = "";
             this.admin_key = "";
             try {
-                console.log(`${import.meta.env.BASE_URL}`)
-                console.log(`${this.apiUrl}/create`)
+                const betterFormData = Object.entries(this.formData)
+                    .filter(([key, value]) => value !== null)
+                    .reduce((obj, [key, value]) => {
+                        obj[key] = value;
+                        return obj;
+                    }, {});
                 const response = await fetch(`${this.apiUrl}/create`, {
                     method: "POST",
-                    body: JSON.stringify(this.formData),
+                    body: JSON.stringify(betterFormData),
                     headers: {
                         "Content-Type": "application/json"
                     }
