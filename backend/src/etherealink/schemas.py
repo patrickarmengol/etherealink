@@ -21,8 +21,11 @@ class URLCustom(URLCreate):
     custom_key: str | None
 
     @validator('custom_key')
-    def custom_has_alphanum_dash_underscore(cls, v: str):
-        # maybe limit length
+    def check_custom(cls, v: str):
+        # return if null
+        if v is None:
+            return v
+        # alphanum or underscore or dash
         allowed = string.ascii_letters + string.digits + '-_'
         if not (1 <= len(v) <= 40) or not all(c in allowed for c in v):
             raise ValueError(
