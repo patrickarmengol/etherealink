@@ -5,6 +5,7 @@ from etherealink.config import get_settings
 
 
 def orm_init(app: FastAPI) -> None:
+    print(f'{get_settings().db_url=}')
     register_tortoise(
         app,
         db_url=get_settings().db_url,
