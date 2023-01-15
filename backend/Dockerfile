@@ -10,9 +10,8 @@ FROM base as env-local
 
 FROM base as env-railway
 
-ARG DB_URL
-ENV DB_URL=$DB_URL
-RUN echo $DB_URL
+ARG DATABASE_URL
+ENV DB_URL=$DATABASE_URL
 
 FROM env-${PLATFORM} AS final
 
