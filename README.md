@@ -2,15 +2,16 @@
 
 URL shortener for self-destructible and expirable links
 
-[frontend live demo]()
-[API backend live demo docs]()
+[frontend live demo](https://etherealink-frontend.up.railway.app/)
 
-- Vue.js frontend
+[API backend live demo docs](https://etherealink-backend.up.railway.app/docs)
+
 - FastAPI backend
+- Vue.js frontend
 - create "short" links
 - set expiry datetime
 - set total number of clicks before link becomes inactive
-- update link expiry / num_clicks with an admin link (account-less auth)
+- use admin link to delete link or update expiry/num_clicks (account-less auth)
 - live demos are deployed to railway with docker
 
 ---

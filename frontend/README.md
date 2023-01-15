@@ -3,6 +3,8 @@
 Vue.js frontend for **etherealink**
 URL shortener for self-destructible and expirable links
 
+[live demo](https://etherealink-frontend.up.railway.app/)
+
 -----
 
 **Table of Contents**
@@ -20,8 +22,8 @@ with docker:
 git clone git@github.com:patrickarmengol/etherealink.git
 cd etherealink/frontend
 
-docker build -t etherealink-frontend .
-(can pass env vars with --build-arg VITE_BASE_URL="...")
+DOCKER_BUILDKIT=1 docker build -t etherealink-frontend .
+(can pass env vars with --build-arg VITE_BASE_URL="..." --build-arg VITE_API_URL="...")
 docker run -it -p 8080:80 --rm etherealink-frontend
 ```
 

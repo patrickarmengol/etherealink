@@ -3,6 +3,8 @@
 FastAPI backend for **etherealink**
 URL shortener API for self-destructible and expirable links
 
+[live demo docs](https://etherealink-backend.up.railway.app/docs)
+
 -----
 
 **Table of Contents**
@@ -20,7 +22,8 @@ with docker:
 git clone git@github.com:patrickarmengol/etherealink.git
 cd etherealink/backend
 
-docker build -t etherealink-backend .
+DOCKER_BUILDKIT=1 docker build -t etherealink-backend .
+(can pass DB_URL env var with --build-arg DATABASE_URL="...")
 docker run -it -p 5000:5000 --rm etherealink-backend
 ```
 
@@ -39,6 +42,8 @@ uvicorn etherealink.main:app --host 0.0.0.0 --port 5000
 ## Usage
 
 see generated docs after installation at http://0.0.0.0:5000/docs
+
+or the [live demo docs](https://etherealink-backend.up.railway.app/docs)
 
 ## License
 
