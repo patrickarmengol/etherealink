@@ -5,13 +5,13 @@
             <input class="form-control" type="text" v-model="formData.target_url" required />
             <br />
             <label class="form-control-label">Number of clicks (optional):</label>
-            <input class="form-control" type="number" v-model="formData.num_clicks_left" />
+            <input class="form-control" type="number" v-model="formData.clicks_left" />
             <br />
             <label class="form-control-label">Expiry date (optional):</label>
-            <input class="form-control" type="datetime-local" v-model="formData.expiry_date" />
+            <input class="form-control" type="datetime-local" v-model="formData.expiry" />
             <br />
             <label class="form-control-label">Custom URL key (optional):</label>
-            <input class="form-control" type="text" v-model="formData.custom_url_key" />
+            <input class="form-control" type="text" v-model="formData.custom_key" />
             <br />
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
@@ -40,9 +40,9 @@ export default {
             apiUrl: this.$apiUrl,
             formData: {
                 target_url: null,
-                num_clicks_left: null,
-                expiry_date: null,
-                custom_url_key: null
+                clicks_left: null,
+                expiry: null,
+                custom_key: null
             },
             url_key: "",
             admin_key: "",
